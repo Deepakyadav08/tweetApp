@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h1 class="text-center mb-4">Welcome to my Tweet</h1>
+
+    <div class="text-center mb-4">
+        <a href="{% url 'tweet_create' %}" class="btn btn-primary">
+            Create a Tweet
+        </a>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+
+        {% for tweet in tweet %}
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+
+                {% if tweet.photo %}
+                    <img src="{{ tweet.photo.url }}" class="card-img-top">
+                {% endif %}
+
+                <div class="card-body d-flex flex-column">
+
+                    <h5 class="card-title">
+                        {{ tweet.user.username }}
+                    </h5>
+
+                    <p class="card-text">
+                        <span class="short-text">
+                            {{ tweet.text|truncatewords:5}}
+                        </span>
+                        <span class="full-text d-none">
+                            {{ tweet.text }}
+                        </span>
+                    </p>
+
+                    <!-- ✅ ONLY BUTTON -->
+                    <button class="btn btn-link p-0 mb-2" onclick="toggleText(this)">
+                        Read more
+                    </button>
+
+                    {% if tweet.user == request.user %}
+                    <div class="mt-auto">
+                        <a href="{% url 'tweet_edit' tweet.pk %}" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="{% url 'tweet_delete' tweet.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                    </div>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+        {% empty %}
+        <p class="text-center">No tweets available.</p>
+        {% endfor %}
+
+    </div>
+</div>
+
+<!-- ✅ ONE SCRIPT ONLY (IMPORTANT) -->
+<script>
+function toggleText(button) {
+    const card = button.closest('.card');
+    const shortText = card.querySelector('.short-text');
+    const fullText = card.querySelector('.full-text');
+
+    if (fullText.classList.contains("d-none")) {
+        fullText.classList.remove("d-none");
+        shortText.classList.add("d-none");
+        button.innerText = "Show less";
+    } else {
+        fullText.classList.add("d-none");
+        shortText.classList.remove("d-none");
+        button.innerText = "Read more";
+    }
+}
+</script>
+
+{% endblock content %}

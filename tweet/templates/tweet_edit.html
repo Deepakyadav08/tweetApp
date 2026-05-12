@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+ Welcome to TweetBot
+{% endblock  %}
+   
+
+{% block content %}
+<h1>welcome to my Tweet</h1>
+<h2>
+    {% if form.instance.pk %}
+    Edit Tweet
+    {% else %}
+    Create Tweet
+    {% endif %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+    <a href="">back to list</a>
+</h2>
+{% endblock  %}
