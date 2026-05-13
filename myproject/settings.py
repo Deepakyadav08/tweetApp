@@ -129,3 +129,11 @@ LOGOUT_REDIRECT_URL = '/tweet/'
 LOGIN_REDIRECT_URL = '/tweet/' 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+# ALLOWED_HOSTS = ['tweetapp-tkjs.onrender.com', '127.0.0.1', 'localhost']
+DEBUG = False
+
+ALLOWED_HOSTS = [
+    'tweetapp-tkjs.onrender.com',
+    '127.0.0.1',
+    'localhost',
+]
