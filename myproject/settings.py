@@ -124,7 +124,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_URL = '/static/' # below this add the following line
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 LOGIN_URL = '/accounts/login/'
 LOGOUT_REDIRECT_URL = '/tweet/' 
 LOGIN_REDIRECT_URL = '/tweet/' 
@@ -141,3 +142,10 @@ ALLOWED_HOSTS = [
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+INSTALLED_APPS = [
+    'cloudinary',
+    'cloudinary_storage',
+]
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
